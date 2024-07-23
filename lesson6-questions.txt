@@ -3,35 +3,52 @@ Questions for Lesson 6
 1. When you enable CRUD operations on a table in the database, you need to add four things
 to your Rails application.  When you generate a scaffold, all four are created.What are they?
 
-
+A migration, creates a table in the database for records.
+A model, the Active Record class for the records.
+A controller, handles actions for the records.
+A view, HTML templates with embedded Ruby code for displaying records via the browser.
 
 
 2. When you specify a route in config/routes.rb, you need to include certain information.  What
 must be included? In addition, you may specify an additional parameter to create a variable
 that describes the route.  How do you do that? What variable is created?
 
+In config/routes.rb, you must include the HTTP request usually GET or POST and the path. 
+You can also create a variable for the route by using a colon (:id), which creates a variable params[:id] in the controller.
 
 
 3. What does the Rails db:migrate command do?
 
-
+Runs the migration files, updating the database schema to match the current state defined in the migration files.
 
 4. What file do you look at to see the current database schema?
 
+db/schema.rb
 
 5. What command shows the routes?
 
+bin/rails routes
 
 6. How can you start the Rails console? How can you do CRUD operations from the console?
 
+You can start the Rails console with bin/rails console. 
+From the console, you can do CRUD operations using Active Record methods below. 
+
+Forum.new to create a new instance
+forum.save to save an instance to the database
+Forum.all to retrieve all records
 
 7. What statements are in erb files that make them different from html files?  What are the
 two kinds of special statements, and how are they marked in the erb file? Where are they executed?
 
+ERB files have embedded Ruby code, marked by <% %> for execution without output and <%= %> for execution with output.
+These statements are executed on the server side to generate HTML.
 
 8. Consider this statement: @forum = Forum.new().  Why is Forum capitalized?  Why is @forum not
 capitalized? Why is the @ used?
 
+Forum is capitalized because it is a class name. 
+@forum is not capitalized because the @ symbol denotes an instance variable in Ruby.
 
 
 9. Consider these statements:
@@ -41,6 +58,11 @@ capitalized? Why is the @ used?
 @forum.save(...)
 
 What is the difference between Forum.new() and Forum.create()?  Why can't you do Forum.save(...)?
+
+Forum.new creates a new instance of the Forum class without saving it to the database.
+Forum.create creates a new instance and saves it to the database. 
+Forum.save cannot be called on the class itself and only called on an instance of the class.
+
 
 
 10. In the forums controller, you have a method called show:
@@ -56,6 +78,8 @@ is a hash called params that is passed to that method.  And, in this case, the p
 hash has a value, params[:id].  What is the value for this element of the hash? How
 did it get there?
 
+The default behavior finds and displays the forum record with the ID specified in params[:id]. 
+The params[:id] value comes from the dynamic segment in the route, which matches the ID in the URL.
 
 
 
